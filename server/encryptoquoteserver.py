@@ -1,15 +1,15 @@
 #!/usr/bin/env python
-import decodeaquote
+import encryptoquote
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 
 import os, pwd, grp
 
 def update_quote():
     global quote_tuple, quote_str, enc_quote
-    quote_tuple = decodeaquote.get_random_quote()
+    quote_tuple = encryptoquote.get_random_quote()
     quote_str = quote_tuple[0] + " -- " + quote_tuple[1]
     quote_str = quote_str.upper()
-    enc_quote = decodeaquote.substitution_cipher(quote_str)
+    enc_quote = encryptoquote.substitution_cipher(quote_str)
 update_quote()
 
 def drop_privileges(uid_name='nobody', gid_name='nogroup'):
