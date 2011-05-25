@@ -1,0 +1,79 @@
+encryptoquote - a game of solving encrypted quotes
+--------------------------------------------------
+
+A game that often appears in the puzzle sections of newspapers is one
+where you are given an encrypted quote and you are asked to solve it
+given a single letter as a clue.  This game is slightly harder, as you
+are not given a clue, but slightly easier as you are given a few tools
+to help you with solving the puzzle.
+
+Commands
+--------
+
+r - replace a letter of the encrypted puzzle with a letter in your
+    solution
+x - reset your solution to all blanks (_'s)
+f - print a letter frequency table of the characters in the encrypted
+    quote
+n - print a table of letters that have not been used in the solution
+q - print the solution and quit the program
+
+Sources
+-------
+
+Quotes are scraped from www.quotationspage.com (without permission).
+
+Server
+------
+
+Also included is a preliminary encryptoquote web server, which has all
+the basics of setting up an encryptoquote page, without the ability to
+solve the puzzle, since my web programming fu is not quite up to
+completing that task.
+
+Bugs
+----
+
+- sometimes it hangs when getting a quote (probably due to the web
+  server it is getting it from).  Simply ^C and start again.
+
+Author
+------
+
+Burton Samograd <kruhft@gmail.com>
+May 24, 2011
+
+License
+-------
+
+encryptoquote is distributed under this license:
+
+Copyright (c) 2011, Burton Samograd
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+    * Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+
+    * Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following disclaimer
+in the documentation and/or other materials provided with the
+distribution.
+
+    * Neither the names of the copyright owners nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.

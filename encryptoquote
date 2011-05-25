@@ -1,0 +1,148 @@
+#!/usr/bin/env python
+#
+# encryptoquote - a game of solving encrypted quotes
+#
+# Author: Burton Samograd <kruhft@gmail.com>
+# Date: May 24, 2011
+
+import string
+import random
+from urllib import urlopen
+import re
+
+def get_random_quote():
+    """
+    returns a tuple of which the first element is the quote,
+    the second is the author of the quote and the third is the
+    url that the quote was retrieved from.
+    """
+    while True:
+        max_quote_number = 12842
+        quote_server_url = "http://www.quotationspage.com/quote/"
+        quote_url = quote_server_url + str(random.randint(0, max_quote_number)) + ".html"
+        try:
+            quote_page = urlopen(quote_url).read()
+        except:
+            print >>sys.stderr, "could not retrieve quote."
+            continue
+
+        p = re.compile(r'<.*?>')
+        
+        quote_start_dt =  quote_page.find("<dt>")
+        quote_end_dt = quote_page.find("</dt>")
+
+        quote = quote_page[quote_start_dt+4:quote_end_dt]
+        quote = p.sub('', quote) # strip html
+        if quote == "ERROR: No such quotation number.":
+            continue
+
+        author_start_dd_str = '<dd class="author">'
+        author_start_dd = quote_page.find(author_start_dd_str)
+        author_end_dd = quote_page.find("</dd>")
+
+        author = quote_page[author_start_dd+len(author_start_dd_str):author_end_dd]
+        author = author[len("<b>"):author.find("</b>")]
+        author = p.sub('', author) # strip html
+
+        break
+    
+    return (quote, author, quote_url)
+
+def substitution_cipher(plaintext):
+    while True:
+        alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        cipher_alphabet = list(alphabet)
+        random.shuffle(cipher_alphabet)
+        cipher_alphabet = ''.join(cipher_alphabet)
+
+        all_different = True
+        for i in xrange(0, len(alphabet)):
+            if alphabet[i] == cipher_alphabet[i]:
+                all_different = False
+                break
+            
+        if all_different:
+            break
+    
+    ciphertext = []
+    for c in plaintext:
+        if c not in alphabet:
+            ciphertext.append(c)
+        else:
+            ciphertext.append(cipher_alphabet[alphabet.find(c)])
+    return ''.join(ciphertext)
+
+def main():
+    quote_tuple = get_random_quote()
+    quote_str = quote_tuple[0] + " -- " + quote_tuple[1]
+    quote_str = quote_str.upper()
+
+    enc_quote = substitution_cipher(quote_str)
+
+    def reset_solution():
+        solution = []
+        for i in xrange(0, len(enc_quote)):
+            if enc_quote[i] not in string.ascii_uppercase:
+                solution.append(enc_quote[i])
+            else:
+                solution.append("_")
+        return solution
+    solution = reset_solution()
+
+    while True:
+        print enc_quote
+        print "".join(solution)
+
+        def replace():
+            s = raw_input("Sub: ").upper()
+            r = raw_input("With: ").upper()
+            if len(r) > 0:
+                for i in xrange(0, len(enc_quote)):
+                    if enc_quote[i] == s:
+                        solution[i] = r
+        def freq():
+            freq_tbl = {}
+            for c in enc_quote:
+                if c not in freq_tbl.keys():
+                    freq_tbl[c] = 1
+                else:
+                    freq_tbl[c] += 1
+
+            print "Frequency Table"
+            print "---------------\n"
+
+            for c in sorted(freq_tbl, key=lambda x: freq_tbl[x], reverse=True):
+                if c not in " .,":
+                    print c, freq_tbl[c]
+            print
+
+        def notused():
+            letters = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+            for c in solution:
+                for i in xrange(0, len(letters)):
+                    if c == letters[i]:
+                        del letters[i]
+                        break
+
+            print "Unused letters:"
+            print "---------------\n"
+
+            for c in letters:
+                print c
+            print
+
+        cmd = raw_input("[rxfnq]> ").lower()
+        if cmd == "r":
+            replace()
+        elif cmd == "f":
+            freq()
+        elif cmd == "n":
+            notused()
+        elif cmd == "x":
+            solution = reset_solution()
+        elif cmd == "q":
+            print quote_str
+            break
+
+if __name__ == '__main__':
+    main()
