@@ -29,7 +29,8 @@ Server
 Also included is a preliminary encryptoquote web server, which has all
 the basics of setting up an encryptoquote page, without the ability to
 solve the puzzle, since my web programming fu is not quite up to
-completing that task.
+completing that task (I'm not sure how to get input like from the
+console).  Anybody willing to help complete this, go right ahead.
 
 Bugs
 ----
