@@ -7,6 +7,14 @@ given a single letter as a clue.  This game is slightly harder, as you
 are not given a clue, but slightly easier as you are given a few tools
 to help you with solving the puzzle.
 
+Requirements
+------------
+
+To run encryptoquote you will need Python installed on your system.
+On a Unix system you should just be able to type ./encryptoquote to
+have it run (as long as your python is in /usr/bin). On windows, you
+will have to type 'python.exe encryptoquote'.
+
 Commands
 --------
 
@@ -17,6 +25,14 @@ f - print a letter frequency table of the characters in the encrypted
     quote
 n - print a table of letters that have not been used in the solution
 q - print the solution and quit the program
+
+Hard Mode
+---------
+
+By passing --hard to the encryptoquote command, you can play the game
+in 'hard mode'. All spaces and punctuation are removed from the
+encrypted quote, just like the people at Bletchley Park had to deal
+with. Good luck!
 
 Sources
 -------
