@@ -9,6 +9,7 @@ import string
 import random
 from urllib import urlopen
 import re
+import sys
 
 def get_random_quote():
     """
@@ -92,6 +93,10 @@ def main():
     while True:
         print enc_quote
         print "".join(solution)
+
+        if "".join(solution) == quote_str:
+            print "You have solved the puzzle!"
+            sys.exit(1)
 
         def replace():
             s = raw_input("Sub: ").upper()
