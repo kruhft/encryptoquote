@@ -73,9 +73,15 @@ def substitution_cipher(plaintext):
             ciphertext.append(cipher_alphabet[alphabet.find(c)])
     return ''.join(ciphertext)
 
-def main():
+def main(hard_mode):
     quote_tuple = get_random_quote()
-    quote_str = quote_tuple[0] + " -- " + quote_tuple[1]
+    if hard_mode:
+        quote_str = quote_tuple[0] + quote_tuple[1]
+        quote_str = quote_str.replace(" ", "")
+        for c in ".,;:\"'!()|\\?/":
+            quote_str = quote_str.replace(c, "")
+    else:
+        quote_str = quote_tuple[0] + " -- " + quote_tuple[1]
     quote_str = quote_str.upper()
 
     enc_quote = substitution_cipher(quote_str)
@@ -150,4 +156,11 @@ def main():
             break
 
 if __name__ == '__main__':
-    main()
+    hard_mode = False
+    try:
+        if sys.argv[1] == '--hard':
+            hard_mode = True
+    except:
+        pass
+        
+    main(hard_mode)
