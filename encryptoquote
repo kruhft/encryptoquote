@@ -153,9 +153,10 @@ def main(hard_mode):
             solution = reset_solution()
         elif cmd == "q":
             print quote_str
-            sys.exit();
+            break
         elif cmd == "?":
-            print """r - replace a letter of the encrypted puzzle with a letter in your
+            print \
+"""r - replace a letter of the encrypted puzzle with a letter in your
     solution
 x - reset your solution to all blanks (_'s)
 f - print a letter frequency table of the characters in the encrypted
@@ -164,7 +165,6 @@ n - print a table of letters that have not been used in the solution
 q - print the solution and quit the program
 ? - this help
 """
-            break
 
 if __name__ == '__main__':
     hard_mode = False
