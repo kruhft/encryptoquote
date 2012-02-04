@@ -142,7 +142,7 @@ def main(hard_mode):
                 print c
             print
 
-        cmd = raw_input("[rxfnq]> ").lower()
+        cmd = raw_input("[rxfnq?]> ").lower()
         if cmd == "r":
             replace()
         elif cmd == "f":
@@ -153,6 +153,17 @@ def main(hard_mode):
             solution = reset_solution()
         elif cmd == "q":
             print quote_str
+            sys.exit();
+        elif cmd == "?":
+            print """r - replace a letter of the encrypted puzzle with a letter in your
+    solution
+x - reset your solution to all blanks (_'s)
+f - print a letter frequency table of the characters in the encrypted
+    quote
+n - print a table of letters that have not been used in the solution
+q - print the solution and quit the program
+? - this help
+"""
             break
 
 if __name__ == '__main__':
